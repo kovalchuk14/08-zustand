@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import type {  NoteInputValues } from "../../types/note";
 import { createNote } from "@/lib/api";
 import { useMutation } from '@tanstack/react-query';
-import { useNoteDraftStore } from "@/lib/stores/NoteStore";
+import { useNoteDraftStore } from "@/lib/stores/noteStore";
 
 // const initialValues: NoteInputValues = {
 //     title: "",
