@@ -1,5 +1,23 @@
 import css from "./home.module.css";
+import type { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Not found",
+  description: "there is no page on this url",
+  openGraph: {
+    title: "Not found",
+    description: "there is no page on this url",
+    url: "?",
+    images: [
+      {
+        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Notes picture"
+      },
+    ]
+  }
+};
 export default function NotFound() {
     return (<>
         <h1 className={css.title}>404 - Page not found</h1>

@@ -10,7 +10,7 @@ export interface Note {
 
 export interface NoteInputValues {
     title: string,
-    content?: string,
+    content: string,
     tag: string,
 }
 

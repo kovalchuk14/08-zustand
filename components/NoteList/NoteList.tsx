@@ -6,16 +6,17 @@ import Link from "next/link";
 
 interface NoteListProps {
     notes: Note[],
+     queryKey: (string | number|undefined)[],
 }
 
-export default function NoteList({ notes }: NoteListProps) {
+export default function NoteList({ notes,queryKey }: NoteListProps) {
     const queryClient = useQueryClient();
     const mutation = useMutation({
         mutationFn: async (id:string) => {
             await deleteNote(id);
         },
         onSuccess: async () => {
-            queryClient.invalidateQueries({ queryKey: ["request"] });
+            queryClient.invalidateQueries({ queryKey});
         }
     });
 
