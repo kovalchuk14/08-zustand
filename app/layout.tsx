@@ -14,12 +14,12 @@ variable: '--font-roboto',
 
 
 export const metadata: Metadata = {
-  title: "Notes App",
-  description: "using|creating notes app",
+  title: "Notes App | Your Personal Note Organizer",
+  description: "Create, manage, and organize your notes easily. Access your personal notes anytime, anywhere.",
   openGraph: {
-    title: "Notes App",
-    description: "app for notes created by next.js",
-    url: "?",
+    title: "Notes App | Your Personal Note Organizer",
+    description: "Stay organized with Notes App. Create, edit, and access your notes from anywhere with ease.",
+    url: "https://08-zustand-mu-seven.vercel.app/",
     images: [
       {
         url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",

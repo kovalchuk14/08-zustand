@@ -3,22 +3,23 @@ import {
 } from "@tanstack/react-query";
 import { FetchHttpResponse, fetchNotes } from "@/lib/api";
 import NotesClient from "./Notes.client";
+import { Metadata } from "next";
 
 
 type Props = {
   params: Promise<{ slug: string[] }>;
 };
 
-export async function generateMetadata({ params }: Props){
+export async function generateMetadata({ params }: Props): Promise<Metadata>{
   const { slug } = await params;
   const category = slug[0];
   return {
-    title: `notes: ${category}`,
-    description: `notes with category: ${category}`,
+    title: `Notes in ${category} | Notes App`,
+    description: `Browse and manage your notes in the "${category}" category. Stay organized and keep everything at hand`,
     openGraph: {
-      title: `notes: ${category}`,
-      description: `notes with category: ${category}`,
-      url: "?",
+      title: `Notes in ${category} | Notes App`,
+      description: `Discover and manage your personal notes categorized under "${category}". Access them anytime, anywhere.`,
+      url: `https://08-zustand-mu-seven.vercel.app/notes/filter/${category}`,
       images: [
         {
           url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",

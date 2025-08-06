@@ -1,22 +1,14 @@
 'use client';
-import { useId, useState } from "react";
+import {  useState } from "react";
 import css from "./NoteForm.module.css";
-import { Form, Formik, Field, ErrorMessage, type FormikHelpers } from "formik";
 import * as Yup from "yup";
 import type {  NoteInputValues } from "../../types/note";
 import { createNote } from "@/lib/api";
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNoteDraftStore } from "@/lib/store/noteStore";
+import { useRouter } from "next/navigation";
 
-// const initialValues: NoteInputValues = {
-//     title: "",
-//     content: "",
-//     tag: "Todo",
-// };
 
-interface NoteFormProps {
-    onClose: () => void,
-}
 
 const validationSchema = Yup.object().shape({
     title: Yup.string()
@@ -31,8 +23,8 @@ const validationSchema = Yup.object().shape({
     
 });
 
-export default function NoteForm({ onClose }: NoteFormProps) {
-    
+export default function NoteForm() {
+    const queryClient = useQueryClient();
     const { draft, setDraft, clearDraft } = useNoteDraftStore();
     const [errors, setErrors] = useState<Partial<Record<keyof NoteInputValues, string>>>({});
     const mutation = useMutation({
@@ -41,6 +33,9 @@ export default function NoteForm({ onClose }: NoteFormProps) {
         },
     });
 
+  const router = useRouter();
+  const onClose = () => router.push('/notes/filter/All');
+  
     const handleChange = (
         event: React.ChangeEvent<
             HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -59,7 +54,9 @@ export default function NoteForm({ onClose }: NoteFormProps) {
     await validationSchema.validate(draft, { abortEarly: false });
     mutation.mutate(draft, {
       onSuccess: () => {
+        
         clearDraft();
+        queryClient.invalidateQueries({ queryKey: ['notes'] });
         onClose();
       },
     });

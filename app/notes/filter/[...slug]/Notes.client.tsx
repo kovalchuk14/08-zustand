@@ -5,8 +5,6 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useDebouncedCallback } from "use-debounce";
 import { FetchHttpResponse, fetchNotes } from "@/lib/api";
 import NoteList from "@/components/NoteList/NoteList";
-import Modal from "@/components/Modal/Modal";
-import NoteForm from "@/components/NoteForm/NoteForm";
 import Pagination from "@/components/Pagination/Pagination";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Link from "next/link";
@@ -50,7 +48,7 @@ export default function NotesClient({initData, initialSearch,initialPage,tag}:No
           <Pagination totalPages={ data.totalPages} setCurrentPage={setCurrentPage} currentPage={currentPage} />}
         {<Link href = "/notes/action/create" className={css.button} >Create note +</Link>}
       </header>
-      {(data && data?.notes.length > 0) ? (<NoteList queryKey = {["notes",searchQuery,tag, currentPage]} notes={data.notes}/>) : (<p>No notes, try again later</p>)}
+      {(data && data?.notes.length > 0) ? (<NoteList notes={data.notes}/>) : (<p>No notes, try again later</p>)}
      
     </div>
   );
